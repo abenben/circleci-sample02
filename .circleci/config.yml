@@ -4,4 +4,15 @@ jobs:
     docker:
       - image: circleci/python:3.6.3
     steps:
-      - run: echo "hello world"
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install pytest
+      - run:
+          name: run test
+          command: |
+            . venv/bin/activate
+            pytest
